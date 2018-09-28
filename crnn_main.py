@@ -47,7 +47,7 @@ parser.add_argument('--saveInterval', type=int, default=500, help='Interval to b
 parser.add_argument('--adam', action='store_true', help='Whether to use adam (default is rmsprop)')
 parser.add_argument('--adadelta', action='store_true', help='Whether to use adadelta (default is rmsprop)')
 parser.add_argument('--keep_ratio', action='store_true', help='whether to keep ratio for image resize')
-parser.add_argument('--random_sample', action='store_true', help='whether to sample the dataset with random sampler')
+parser.add_argument('--random_sample', action='store_true', default=True help='whether to sample the dataset with random sampler')
 opt = parser.parse_args()
 print(opt)
 
