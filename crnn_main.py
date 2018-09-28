@@ -36,7 +36,7 @@ parser.add_argument('--lr', type=float, default=0.01, help='learning rate for Cr
 parser.add_argument('--beta1', type=float, default=0.5, help='beta1 for adam. default=0.5')
 parser.add_argument('--cuda', action='store_true', help='enables cuda')
 parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use')
-parser.add_argument('--crnn', default='', help="path to crnn (to continue training)")
+parser.add_argument('--crnn', default='/path/to/crnn/model.pth', help="path to crnn (to continue training)")
 parser.add_argument('--alphabet', type=str, default= str1)
 parser.add_argument('--Diters', type=int, default=5, help='number of D iters per each G iter')
 parser.add_argument('--experiment', default=None, help='Where to store samples and models')
@@ -101,19 +101,14 @@ def weights_init(m):
 
 crnn = crnn.CRNN(opt.imgH, nc, nclass, opt.nh)
 crnn.apply(weights_init)
+#load pretrained model,here setting default value
 if opt.crnn != '':
     print('loading pretrained model from %s' % opt.crnn)
-    pre_trainmodel = torch.load(opt.crnn)
-    model_dict = crnn.state_dict()
-    weig1 = 'rnn.1.embedding.weight'
-    bias1 = 'rnn.1.embedding.bias'
-    if len(model_dict[weig1]) == len(pre_trainmodel[weig1]) and len(model_dict[bias1]) == len(pre_trainmodel[bias1]):
-        crnn.load_state_dict(pre_trainmodel)
-    else :
-        for k,v in model_dict.items():
-            if (k != weig1 or k != bias1):
-                model_dict[k] = pre_trainmodel[k]            			
-        crnn.load_state_dict(model_dict)
+    crnn.load_state_dict(torch.load(opt.crnn))
+else:
+    print("please loading pretrained model")
+    exit()
+    
 print(crnn)
 
 image = torch.FloatTensor(opt.batchSize, 3, opt.imgH, opt.imgH)
