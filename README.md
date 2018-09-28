@@ -4,6 +4,7 @@ fork from meijieru/crnn.pytorch https://github.com/meijieru/crnn.pytorch
 #### 1.1 基础环境
 * Ubuntu14.04 + CUDA
 * opencv2.4 + pytorch + lmdb +wrap_ctc
+* Python2.7
 
 安装lmdb `apt-get install lmdb`
 #### 1.2 安装pytorch
