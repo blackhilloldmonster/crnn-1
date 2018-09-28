@@ -2,7 +2,7 @@ fork from meijieru/crnn.pytorch https://github.com/meijieru/crnn.pytorch
 ## crnn实现细节(pytorch)
 ### 1.环境搭建
 #### 1.1 基础环境
-* Ubuntu14.04 + CUDA
+* Ubuntu>=14.04 + CUDA>=8.0
 * opencv2.4 + pytorch + lmdb +wrap_ctc
 * Python2.7
 
